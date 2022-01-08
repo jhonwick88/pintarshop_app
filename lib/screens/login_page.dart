@@ -84,7 +84,10 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(30)),
                     ),
                     onPressed: () {},
-                    child: const Text('Login'))),
+                    child: const Text(
+                      'LOGIN',
+                      style: TextStyle(fontSize: 23),
+                    ))),
           ],
         ),
       ),
