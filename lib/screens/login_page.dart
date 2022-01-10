@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pintarshop_app/animations/fade_animation.dart';
+import 'package:pintarshop_app/repositories/auth_repository.dart';
+import 'package:pintarshop_app/repositories/main_repository.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,8 +11,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  AuthenticationRepository mainRepository;
   @override
   Widget build(BuildContext context) {
+    //mainRepository.logIn(email: "kjadk@ajdk", password: "uyruwyeuir");
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(3, 9, 23, 1.0),
       body: Container(

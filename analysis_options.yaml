@@ -16,6 +16,8 @@ analyzer:
 # can be found at https://dart-lang.github.io/linter/lints/options/options.html
 linter:
   rules:
+    type_annotate_public_apis: false
+    unnecessary_raw_strings: false
     # Util classes are awesome!
     # avoid_classes_with_only_static_members: false
     

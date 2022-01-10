@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ApiInterceptors extends Interceptor {
-  BuildContext context;
-  ApiInterceptors({required this.context});
+  //BuildContext context;
+  ApiInterceptors();
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
