@@ -6,16 +6,16 @@ part 'user.dart';
 
 @JsonSerializable()
 class UserModel {
-  late User? user;
-  late String? token;
+  final User? user;
+  final String? token;
 
-  UserModel({this.user, this.token});
+  const UserModel({this.user, this.token});
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
-  // static UserModel empty = UserModel(
-  //     user: User(id: 0, username: "", nickname: "", email: "", role: 0),
-  //     token: "");
+  static const empty = UserModel(
+      user: User(id: 0, username: "", nickname: "", email: "", role: 0),
+      token: "");
 }
