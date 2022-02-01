@@ -69,7 +69,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               Navigator.push(
                   context,
                   PageTransition(
-                      type: PageTransitionType.fade, child: const LoginPage()));
+                      type: PageTransitionType.fade, child: LoginPage()));
             }
           });
   }

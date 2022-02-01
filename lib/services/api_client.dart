@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:pintarshop_app/models/base_model.dart';
 import 'package:pintarshop_app/services/api_interceptors.dart';
 import 'package:pintarshop_app/services/api_log_interceptor.dart';

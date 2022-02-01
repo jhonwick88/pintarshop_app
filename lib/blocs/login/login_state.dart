@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:formz/formz.dart';
+part of 'login_bloc.dart';
 
 class LoginState extends Equatable {
   final FormzStatus status;
@@ -8,6 +7,9 @@ class LoginState extends Equatable {
 
   const LoginState(
       {this.status = FormzStatus.pure, this.email = '', this.password = ''});
+
+  bool get isValidEmail => email.length > 3;
+  bool get isValidPassword => password.length == 8;
 
   LoginState copyWith({
     FormzStatus? status,

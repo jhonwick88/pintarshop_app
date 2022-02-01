@@ -6,19 +6,31 @@ enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository extends MainRepository {
   //final client = ApiClient();
-  final _controller = StreamController<UserModel>();
+  final _controller = StreamController<AuthenticationStatus>();
+
+  Stream<AuthenticationStatus> get status async* {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    yield AuthenticationStatus.unauthenticated;
+    yield* _controller.stream;
+  }
 
   Future<void> logIn({required String email, required String password}) async {
     try {
       final res = await apiClient.postUserLogin(email, password);
-      //if (res.code == 0) {
-      final UserModel userModel =
-          UserModel.fromJson(res.data as Map<String, dynamic>);
-      _controller.add(userModel);
-      //}
+      if (res.code == 0) {
+        final UserModel userModel =
+            UserModel.fromJson(res.data as Map<String, dynamic>);
+        _controller.add(AuthenticationStatus.authenticated);
+      } else {
+        _controller.add(AuthenticationStatus.unauthenticated);
+      }
     } catch (e) {
       rethrow;
     }
+  }
+
+  void logOut() {
+    _controller.add(AuthenticationStatus.unauthenticated);
   }
 
   void dispose() {

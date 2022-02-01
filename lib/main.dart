@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pintarshop_app/screens/login_page.dart';
 import 'package:pintarshop_app/screens/splash_page.dart';
 
 void main() {
