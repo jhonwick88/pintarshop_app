@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  // const MyHomePage({Key? key}) : super(key: key);
+  static Route route() {
+    return MaterialPageRoute(builder: (_) => MyHomePage());
+  }
 
   @override
   _MyHomePageState createState() => _MyHomePageState();

@@ -5,7 +5,7 @@ class UserRepository {
   var pref = SharedPreferencesActions();
   UserModel? _userModel;
 
-  Future<Object?> getUserModel() async {
+  Future<UserModel?> getUserModel() async {
     if (_userModel != null) return _userModel;
     return Future.delayed(
         const Duration(milliseconds: 300),

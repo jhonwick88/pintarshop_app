@@ -4,9 +4,13 @@ import 'package:pintarshop_app/animations/fade_animation.dart';
 import 'package:pintarshop_app/screens/login_page.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  //const SplashPage({Key? key}) : super(key: key);
   @override
   _SplashPageState createState() => _SplashPageState();
+
+  static Route route() {
+    return MaterialPageRoute(builder: (_) => SplashPage());
+  }
 }
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {

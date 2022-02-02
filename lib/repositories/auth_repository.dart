@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:pintarshop_app/models/user/user_model.dart';
 import 'package:pintarshop_app/repositories/main_repository.dart';
 
@@ -20,6 +21,8 @@ class AuthenticationRepository extends MainRepository {
       if (res.code == 0) {
         final UserModel userModel =
             UserModel.fromJson(res.data as Map<String, dynamic>);
+        debugPrint("Login auth repo");
+        debugPrint("token ${userModel.token}");
         _controller.add(AuthenticationStatus.authenticated);
       } else {
         _controller.add(AuthenticationStatus.unauthenticated);

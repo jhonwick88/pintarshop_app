@@ -25,28 +25,28 @@ class LoginPage extends StatelessWidget {
                 authenticationRepository:
                     RepositoryProvider.of<AuthenticationRepository>(context));
           },
-          child: LoginCheck(),
+          child: LoginForm(),
         ),
       ),
     );
   }
 }
 
-class LoginCheck extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if (state.status.isSubmissionFailure) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(const SnackBar(content: Text("Autentikasi gagal")));
-        }
-      },
-      child: const Text('Okeee'),
-    );
-  }
-}
+// class LoginCheck extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocListener<LoginBloc, LoginState>(
+//       listener: (context, state) {
+//         if (state.status.isSubmissionFailure) {
+//           ScaffoldMessenger.of(context)
+//             ..hideCurrentSnackBar()
+//             ..showSnackBar(const SnackBar(content: Text("Autentikasi gagal")));
+//         }
+//       },
+//       child: const Text('Okeee'),
+//     );
+//   }
+// }
 
 class LoginForm extends StatelessWidget {
   @override
@@ -122,9 +122,11 @@ class _LoginButton extends StatelessWidget {
                     ? () {
                         context.read<LoginBloc>().add(const LoginSubmitted());
                       }
-                    : null,
+                    : () {
+                        context.read<LoginBloc>().add(const LoginSubmitted());
+                      },
                 child: const Text(
-                  'LOGIN',
+                  'LOGINX',
                   style: TextStyle(fontSize: 23),
                 ));
       },

@@ -28,6 +28,7 @@ class ApiLogInterceptor extends Interceptor {
     logPrint('*** Api Error - Start ***:');
 
     logPrint('URI: ${err.requestOptions.uri}');
+    logPrint('iki error ${err.toString()}');
     if (err.response != null) {
       logPrint('STATUS CODE: ${err.response?.statusCode?.toString()}');
     }
