@@ -144,8 +144,8 @@ class _PasswordInput extends StatelessWidget {
           decoration: const BoxDecoration(
               border: Border(bottom: BorderSide(color: Colors.grey))),
           child: TextFormField(
-            validator: (value) =>
-                state.isValidPassword ? null : "Password Salah",
+            // validator: (value) =>
+            //     state.isValidPassword ? null : "Password Salah",
             onChanged: (password) =>
                 context.read<LoginBloc>().add(LoginPasswordChanged(password)),
             decoration: InputDecoration(

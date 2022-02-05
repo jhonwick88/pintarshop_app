@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pintarshop_app/repositories/auth_repository.dart';
+import 'package:pintarshop_app/services/api_client.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -55,8 +56,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     // if (state.status.isValidated) {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
-    await _authenticationRepository.logIn(
-        email: state.email, password: state.password);
+    final client = ApiClient();
+    await client.postUserLogin(state.email, state.password);
+    // await _authenticationRepository.logIn(
+    //     email: state.email, password: state.password);
     //}
   }
 }

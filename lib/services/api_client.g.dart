@@ -8,7 +8,7 @@ part of 'api_client.dart';
 
 class _ApiClient implements ApiClient {
   _ApiClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://192.168.4.53:8000/api/v1';
+    baseUrl ??= 'http://10.0.2.2:8080/api/v1';
   }
 
   final Dio _dio;
@@ -19,8 +19,8 @@ class _ApiClient implements ApiClient {
   Future<BaseModel> postUserLogin(email, password) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'email': email,
-      r'password': password
+      'email': email,
+      'password': password
     };
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
