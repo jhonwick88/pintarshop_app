@@ -16,13 +16,11 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<BaseModel> postUserLogin(email, password) async {
+  Future<BaseModel> postUserLogin(params) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      'email': email,
-      'password': password
-    };
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(params);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BaseModel>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
@@ -71,8 +69,8 @@ class _ApiClient implements ApiClient {
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BaseModel>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/items',
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/auth/items',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = BaseModel.fromJson(_result.data!);

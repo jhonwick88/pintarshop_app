@@ -6,7 +6,6 @@ import 'package:pintarshop_app/repositories/main_repository.dart';
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository extends MainRepository {
-  //final client = ApiClient();
   final _controller = StreamController<AuthenticationStatus>();
 
   Stream<AuthenticationStatus> get status async* {
@@ -15,21 +14,39 @@ class AuthenticationRepository extends MainRepository {
     yield* _controller.stream;
   }
 
-  Future<void> logIn({required String email, required String password}) async {
+  // Future<void> logIn({
+  //   required String username,
+  //   required String password,
+  // }) async {
+  //   await Future.delayed(
+  //     const Duration(milliseconds: 300),
+  //     () => _controller.add(AuthenticationStatus.authenticated),
+  //   );
+  // }
+
+  Future<bool> logIn({required String email, required String password}) async {
+    final Map<String, String> params = {'email': email, 'password': password};
     try {
-      final res = await apiClient.postUserLogin(email, password);
+      final res = await apiClient.postUserLogin(params);
       if (res.code == 0) {
         final UserModel userModel =
             UserModel.fromJson(res.data as Map<String, dynamic>);
-        debugPrint("Login auth repo");
+        // debugPrint("Login auth repo");
         debugPrint("token ${userModel.token}");
+        pref.write(key: 'token', value: userModel.token);
         _controller.add(AuthenticationStatus.authenticated);
+        return true;
       } else {
         _controller.add(AuthenticationStatus.unauthenticated);
+        return false;
       }
     } catch (e) {
-      rethrow;
+      return false;
     }
+  }
+
+  Future getItems() async {
+    await apiClient.getItems(1, 10);
   }
 
   void logOut() {

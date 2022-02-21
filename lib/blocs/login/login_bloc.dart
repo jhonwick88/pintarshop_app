@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pintarshop_app/repositories/auth_repository.dart';
-import 'package:pintarshop_app/services/api_client.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -20,24 +19,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
   final AuthenticationRepository _authenticationRepository;
 
-  // @override
-  // Stream<LoginState> onEvent(LoginEvent event) async* {
-  //   super.onEvent(event);
-  //   if (event is LoginEmailChanged) {
-  //     yield state.copyWith(email: event.email);
-  //   } else if (event is LoginPasswordChanged) {
-  //     yield state.copyWith(password: event.password);
-  //   } else if (event is LoginSubmitted) {
-  //     yield state.copyWith(status: FormzStatus.submissionInProgress);
-  //     try {
-  //       await _authenticationRepository.logIn(
-  //           email: state.email, password: state.password);
-  //     } catch (_) {
-  //       yield state.copyWith(status: FormzStatus.submissionFailure);
-  //     }
-  //   }
-  // }
-
   void _onLoginEmailChanged(LoginEmailChanged event, Emitter<LoginState> emit) {
     emit(state.copyWith(email: event.email));
   }
@@ -46,6 +27,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginPasswordChanged event, Emitter<LoginState> emit) {
     emit(state.copyWith(password: event.password));
   }
+
+  // Future _onSubmitted(
+  //   LoginSubmitted event,
+  //   Emitter<LoginState> emit,
+  // ) async {
+  //   //if (state.status.isValidated) {
+  //   emit(state.copyWith(status: FormzStatus.submissionInProgress));
+  //   try {
+  //     await _authenticationRepository.logIn(
+  //       username: state.email,
+  //       password: state.password,
+  //     );
+  //     emit(state.copyWith(status: FormzStatus.submissionSuccess));
+  //   } catch (_) {
+  //     emit(state.copyWith(status: FormzStatus.submissionFailure));
+  //   }
+  //   // }
+  // }
 
   FutureOr<void> _onLoginSubmitted(
       LoginSubmitted event, Emitter<LoginState> emit) async {
@@ -56,10 +55,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     // if (state.status.isValidated) {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
-    final client = ApiClient();
-    await client.postUserLogin(state.email, state.password);
-    // await _authenticationRepository.logIn(
-    //     email: state.email, password: state.password);
-    //}
+    // final client = ApiClient();
+    // await client.postUserLogin(state.email, state.password);
+    //await _authenticationRepository.getItems();
+    final bool isSuccess = await _authenticationRepository.logIn(
+        email: state.email, password: state.password);
+    isSuccess
+        ? emit(state.copyWith(status: FormzStatus.submissionSuccess))
+        : emit(state.copyWith(status: FormzStatus.submissionFailure));
   }
 }

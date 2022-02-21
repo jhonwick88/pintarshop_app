@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pintarshop_app/animations/fade_animation.dart';
 import 'package:pintarshop_app/screens/login_page.dart';
+import 'package:pintarshop_app/screens/my_home_page.dart';
+import 'package:pintarshop_app/utils/shared_preferences_actions.dart';
 
 class SplashPage extends StatefulWidget {
   //const SplashPage({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late Animation<double> _scale2Animation;
   late Animation<double> _widthAnimation;
   late Animation<double> _positionAnimation;
+  var pref = SharedPreferencesActions();
 
   bool hideIcon = false;
   @override
@@ -70,10 +73,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         Tween<double>(begin: 1.0, end: 32.0).animate(_scale2Controller)
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed) {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.fade, child: LoginPage()));
+              _checkLogin();
             }
           });
   }
@@ -225,5 +225,17 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  Future<void> _checkLogin() async {
+    final String token = await pref.read(key: "token");
+    if (!mounted) return;
+    if (token != "") {
+      Navigator.push(context,
+          PageTransition(type: PageTransitionType.fade, child: LoginPage()));
+    } else {
+      Navigator.push(context,
+          PageTransition(type: PageTransitionType.fade, child: LoginPage()));
+    }
   }
 }

@@ -21,8 +21,7 @@ abstract class ApiClient {
   }
 
   @POST("/auth/login")
-  Future<BaseModel> postUserLogin(
-      @Query("email") String email, @Query("password") String password);
+  Future<BaseModel> postUserLogin(@Body() Map<String, dynamic> params);
 
   @POST("/auth/logout")
   Future<BaseModel> postUserLogout();
@@ -30,7 +29,7 @@ abstract class ApiClient {
   @POST("/auth/register")
   Future<BaseModel> postUserRegister(@Queries() Map<String, dynamic> queries);
 
-  @GET("/items")
+  @POST("/auth/items")
   Future<BaseModel> getItems(
       @Query("page") int page, @Query("limit") int limit);
 }
