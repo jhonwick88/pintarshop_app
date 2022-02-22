@@ -128,9 +128,7 @@ class _LoginButton extends StatelessWidget {
                     ? () {
                         context.read<LoginBloc>().add(const LoginSubmitted());
                       }
-                    : () {
-                        context.read<LoginBloc>().add(const LoginSubmitted());
-                      },
+                    : null,
                 child: const Text(
                   'LOGINX',
                   style: TextStyle(fontSize: 23),
@@ -157,6 +155,7 @@ class _PasswordInput extends StatelessWidget {
             decoration: InputDecoration(
                 border: InputBorder.none,
                 hintStyle: TextStyle(color: Colors.grey.withOpacity(0.8)),
+                errorText: state.password.invalid ? 'Password Salah' : null,
                 hintText: "Password"),
           ),
         );
@@ -177,11 +176,10 @@ class _EmailInput extends StatelessWidget {
           child: TextFormField(
             onChanged: (email) =>
                 context.read<LoginBloc>().add(LoginEmailChanged(email)),
-            validator: (value) =>
-                state.isValidEmail ? null : "Email not correct",
             decoration: InputDecoration(
                 border: InputBorder.none,
                 hintStyle: TextStyle(color: Colors.grey.withOpacity(0.8)),
+                errorText: state.email.invalid ? "Email not correct" : null,
                 hintText: "Email"),
           ),
         );
