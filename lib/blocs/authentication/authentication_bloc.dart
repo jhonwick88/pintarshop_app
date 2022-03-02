@@ -35,12 +35,7 @@ class AuthenticationBloc
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
-        final user = _tryGetUser();
-        //  debugPrint('yes print ${user?.token}');
-        // ignore: unnecessary_null_comparison
-        user != null ? debugPrint('YES LOGIN') : debugPrint('FAIL');
-        ////AuthenticationState.authenticated(user)
-        // ignore: unnecessary_null_comparison
+        final user = await _tryGetUser();
         return emit(user != null
             ? AuthenticationState.authenticated(user)
             : const AuthenticationState.unauthenticated());
@@ -64,19 +59,24 @@ class AuthenticationBloc
   //     return null;
   //   }
   // }
-  UserModel? _tryGetUser() {
+  Future<UserModel?> _tryGetUser() async {
+    try {
+      final user2 = await _userRepository.getUserModel();
+      return user2;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  UserModel? _tryUser() {
     const user =
         UserModel(user: User(id: 1, username: "Paijo"), token: 'tokenuuu');
     return user;
-    // try {
-    //   //final user = await _userRepository.getUserModel();
-    //   final user = await UserModel( user: User(id: 1, username: "Paijo"), token: "yes token"));
-
-    //   return user;
-    // } catch (_) {
-    //   return null;
-    // }
   }
+  // const user =
+  //     UserModel(user: User(id: 1, username: "Paijo"), token: 'tokenuuu');
+  // return user;
+  // final user = await UserModel( user: User(id: 1, username: "Paijo"), token: "yes token"));
 
   @override
   Future<void> close() {

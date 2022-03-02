@@ -232,7 +232,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     if (!mounted) return;
     if (token != "") {
       Navigator.push(context,
-          PageTransition(type: PageTransitionType.fade, child: LoginPage()));
+          PageTransition(type: PageTransitionType.fade, child: MyHomePage()));
     } else {
       Navigator.push(context,
           PageTransition(type: PageTransitionType.fade, child: LoginPage()));

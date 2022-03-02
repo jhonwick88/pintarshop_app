@@ -19,8 +19,7 @@ class MyHomePage extends StatelessWidget {
             Builder(
               builder: (context) {
                 final userId = context.select(
-                  (AuthenticationBloc bloc) =>
-                      bloc.state.userModel.user?.username,
+                  (AuthenticationBloc bloc) => bloc.state.userModel.user?.email,
                 );
                 return Text('UserID: $userId');
               },
