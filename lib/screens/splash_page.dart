@@ -228,7 +228,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   Future<void> _checkLogin() async {
-    final String token = await pref.read(key: "token");
+    final String token = await pref.read(key: "user_model");
+    debugPrint('userModel $token');
     if (!mounted) return;
     if (token != "") {
       Navigator.push(context,

@@ -51,15 +51,8 @@ class AuthenticationBloc
     _authenticationRepository.logOut();
   }
 
-  // Future<UserTes?> _tryGetUser() async {
-  //   try {
-  //     final user = await _userRepository.getUser();
-  //     return user;
-  //   } catch (_) {
-  //     return null;
-  //   }
-  // }
   Future<UserModel?> _tryGetUser() async {
+    debugPrint('try get user');
     try {
       final user2 = await _userRepository.getUserModel();
       return user2;
@@ -67,16 +60,6 @@ class AuthenticationBloc
       return null;
     }
   }
-
-  UserModel? _tryUser() {
-    const user =
-        UserModel(user: User(id: 1, username: "Paijo"), token: 'tokenuuu');
-    return user;
-  }
-  // const user =
-  //     UserModel(user: User(id: 1, username: "Paijo"), token: 'tokenuuu');
-  // return user;
-  // final user = await UserModel( user: User(id: 1, username: "Paijo"), token: "yes token"));
 
   @override
   Future<void> close() {

@@ -53,6 +53,7 @@ class AuthenticationRepository extends MainRepository {
   }
 
   void logOut() {
+    pref.delete(key: 'user_model');
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 
