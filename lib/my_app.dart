@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pintarshop_app/blocs/authentication/authentication_bloc.dart';
+import 'package:pintarshop_app/repositories/auth_repository.dart';
+import 'package:pintarshop_app/repositories/user_repository.dart';
 import 'package:pintarshop_app/screens/login_page.dart';
 import 'package:pintarshop_app/screens/my_home_page.dart';
 import 'package:pintarshop_app/screens/splash_page.dart';
-import 'package:pintarshop_app/screens/splash_screen.dart';
-import 'package:pintarshop_app/repositories/auth_repository.dart';
-import 'package:pintarshop_app/repositories/user_repository.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({

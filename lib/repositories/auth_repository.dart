@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:pintarshop_app/models/user/user_model.dart';
 import 'package:pintarshop_app/repositories/main_repository.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pintarshop_app/animations/fade_animation.dart';
-import 'package:pintarshop_app/blocs/authentication/authentication_bloc.dart';
+//import 'package:pintarshop_app/blocs/authentication/authentication_bloc.dart';
 import 'package:pintarshop_app/blocs/login/login_bloc.dart';
 import 'package:pintarshop_app/repositories/auth_repository.dart';
 
